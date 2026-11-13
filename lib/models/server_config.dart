@@ -182,23 +182,26 @@ class ServerConfig {
     }
   }
 
-  /// Default Leda Private Server template with actual server keys
-  static ServerConfig defaultHetzner() {
+  /// Default server template with safe placeholder values (for open-source distribution)
+  static ServerConfig defaultTemplate() {
     return ServerConfig(
-      id: 'leda_private_1',
-      name: '🇩🇪 Leda Private Server',
-      address: '178.238.228.77',
+      id: 'default_vless_server',
+      name: '🇩🇪 High-Speed VLESS Reality Node',
+      address: 'YOUR_SERVER_IP',
       port: 8443,
-      uuid: 'b831381d-6324-4d53-ad4f-8cda48b30811',
+      uuid: '00000000-0000-0000-0000-000000000000',
       flow: 'xtls-rprx-vision',
       security: 'reality',
       network: 'tcp',
       sni: 'gateway.icloud.com',
-      pbk: 'GthdijmSN9UGJpQpr4ofgb6OrZxqWyWPYHINBakbRxo',
+      pbk: 'YOUR_REALITY_PUBLIC_KEY',
       sid: '16a8',
       fp: 'chrome',
       countryCode: 'DE',
-      pingMs: 48,
+      pingMs: -1,
     );
   }
+
+  /// Backward-compatible alias
+  static ServerConfig defaultHetzner() => defaultTemplate();
 }

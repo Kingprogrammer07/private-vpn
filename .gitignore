@@ -49,3 +49,14 @@ android/.gradle/
 
 # Widget Preview related
 .widget_preview/
+
+# Private VPN Secrets & Keys (Keep local config private)
+assets/config/default_server.json
+!assets/config/default_server.json.example
+*.pem
+*.key
+.env
+.env.*
+server/cert/
+server/db/
+

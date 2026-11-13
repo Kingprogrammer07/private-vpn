@@ -1,0 +1,16 @@
+{
+  "id": "custom_private_1",
+  "name": "🇩🇪 My Private VPN",
+  "address": "YOUR_SERVER_IP",
+  "port": 8443,
+  "uuid": "00000000-0000-0000-0000-000000000000",
+  "flow": "xtls-rprx-vision",
+  "security": "reality",
+  "network": "tcp",
+  "sni": "gateway.icloud.com",
+  "pbk": "YOUR_REALITY_PUBLIC_KEY",
+  "sid": "16a8",
+  "fp": "chrome",
+  "countryCode": "DE",
+  "pingMs": 45
+}

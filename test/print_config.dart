@@ -1,7 +1,7 @@
 import 'package:flutter_v2ray/flutter_v2ray.dart';
 
 void main() {
-  final url = 'vless://b831381d-6324-4d53-ad4f-8cda48b30811@178.238.228.77:8443?type=tcp&security=reality&flow=xtls-rprx-vision&sni=www.yahoo.com&pbk=GthdijmSN9UGJpQpr4ofgb6OrZxqWyWPYHINBakbRxo&sid=16a8&fp=chrome#Leda';
+  final url = 'vless://00000000-0000-0000-0000-000000000000@203.0.113.195:8443?type=tcp&security=reality&flow=xtls-rprx-vision&sni=gateway.icloud.com&pbk=1111111111111111111111111111111111111111111&sid=16a8&fp=chrome#Demo';
   final parsed = FlutterV2ray.parseFromURL(url);
   print(parsed.getFullConfiguration());
 }

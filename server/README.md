@@ -1,13 +1,13 @@
 # Private VPN Server Infrastructure
 
-Self-hosted VLESS Reality + XTLS-Vision VPN backend using 3X-UI on Ubuntu.
+Self-hosted VLESS Reality + XTLS-Vision VPN backend using 3X-UI on Ubuntu / Debian.
 
-## Server Details
-- **Domain:** `vpn.softhub.uz`
-- **Server IP:** `178.238.228.77`
-- **Port:** `8443` (VLESS Reality)
-- **Web UI:** `https://vpn.softhub.uz` (Proxying 127.0.0.1:2053)
-- **SNI Target:** `gateway.icloud.com`
+## Server Parameters Example
+- **Domain:** `vpn.yourdomain.com` (for SSL Admin Panel)
+- **Server IP:** `<YOUR_SERVER_IP>`
+- **Port:** `8443` (VLESS Reality inbound)
+- **Web UI:** `https://vpn.yourdomain.com` (Reverse proxied via Nginx to 127.0.0.1:2053)
+- **SNI Target:** `gateway.icloud.com` (or `www.microsoft.com`, `www.yahoo.com`)
 
 ## Directory Structure on Server
 ```bash

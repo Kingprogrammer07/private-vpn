@@ -6,13 +6,13 @@ void main() {
   group('ServerConfig Tests', () {
     test('Correctly parses standard VLESS Reality URL', () {
       const vlessUrl =
-          'vless://b831381d-6324-4d53-ad4f-8cda48b30811@159.69.120.45:443?type=tcp&security=reality&flow=xtls-rprx-vision&sni=www.yahoo.com&pbk=Y7v1zM6nC1wV_m8s2x_P7p0_q5k3L9y8Z1x0A2B3C4D&sid=16a8&fp=chrome#%F0%9F%87%A9%F0%9F%87%AA%20Hetzner%20Frankfurt';
+          'vless://a1b2c3d4-e5f6-7890-abcd-ef1234567890@198.51.100.25:443?type=tcp&security=reality&flow=xtls-rprx-vision&sni=www.yahoo.com&pbk=Y7v1zM6nC1wV_m8s2x_P7p0_q5k3L9y8Z1x0A2B3C4D&sid=16a8&fp=chrome#%F0%9F%87%A9%F0%9F%87%AA%20Hetzner%20Frankfurt';
 
       final config = ServerConfig.fromVlessUrl(vlessUrl);
 
-      expect(config.address, equals('159.69.120.45'));
+      expect(config.address, equals('198.51.100.25'));
       expect(config.port, equals(443));
-      expect(config.uuid, equals('b831381d-6324-4d53-ad4f-8cda48b30811'));
+      expect(config.uuid, equals('a1b2c3d4-e5f6-7890-abcd-ef1234567890'));
       expect(config.security, equals('reality'));
       expect(config.network, equals('tcp'));
       expect(config.flow, equals('xtls-rprx-vision'));
