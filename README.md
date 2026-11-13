@@ -219,6 +219,14 @@ flutter build ios --release
 # Open ios/Runner.xcworkspace in Xcode, select your Development Team, and deploy to your iPhone.
 ```
 
+### 5. Build for Windows Desktop
+```bash
+flutter build windows --release
+# Portable Windows application will be packaged in:
+# build/windows/x64/runner/Release/
+```
+The Windows client comes with integrated Xray-core support, allowing instant 1-click connection via system proxy on Windows 10 & 11 without administrative drivers.
+
 ---
 
 ## 🛡️ Security & Privacy Model

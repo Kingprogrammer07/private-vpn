@@ -60,3 +60,11 @@ assets/config/default_server.json
 server/cert/
 server/db/
 
+# Windows Binaries & Build outputs
+windows/bin/
+*.exe
+*.dll
+*.dat
+*.pdb
+
+

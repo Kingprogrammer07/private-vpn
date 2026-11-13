@@ -5,11 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_v2ray/flutter_v2ray.dart';
 import '../models/server_config.dart';
 import '../models/vpn_state.dart';
+import 'windows_vpn_service.dart';
 
 class VpnService {
   FlutterV2ray? _v2ray;
+  final WindowsVpnService _windowsVpn = WindowsVpnService();
   final StreamController<VpnStatusInfo> _statusController =
       StreamController<VpnStatusInfo>.broadcast();
+
 
   VpnStatusInfo _currentStatus = const VpnStatusInfo();
   Timer? _mockTimer;
@@ -122,8 +125,19 @@ class VpnService {
         }
       }
       return false;
+    } else if (Platform.isWindows) {
+      final success = await _windowsVpn.connect(server);
+      if (success) {
+        _connectedAt = DateTime.now();
+        _updateState(VpnConnectionState.connected);
+        _startMockTraffic();
+        return true;
+      } else {
+        _updateState(VpnConnectionState.error);
+        return false;
+      }
     } else {
-      // Simulation / Test mode (for Windows desktop preview and iOS development)
+      // Simulation / Test mode (for other platforms/dev)
       debugPrint('Running VPN in simulation mode on ${Platform.operatingSystem}');
       await Future.delayed(const Duration(milliseconds: 1200));
       _connectedAt = DateTime.now();
@@ -144,6 +158,8 @@ class VpnService {
       } catch (e) {
         debugPrint('Disconnect error: $e');
       }
+    } else if (Platform.isWindows) {
+      await _windowsVpn.disconnect();
     } else {
       await Future.delayed(const Duration(milliseconds: 500));
     }
@@ -162,6 +178,8 @@ class VpnService {
       } catch (e) {
         return -1;
       }
+    } else if (Platform.isWindows) {
+      return await _windowsVpn.measurePing(server);
     } else {
       // Mock ping around 48-62ms for Hetzner Germany
       await Future.delayed(const Duration(milliseconds: 300));
