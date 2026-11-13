@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.antigravity.vpn" "\0"
-            VALUE "FileDescription", "antigravity_vpn" "\0"
+            VALUE "CompanyName", "Private VPN" "\0"
+            VALUE "FileDescription", "Private VPN Client" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "antigravity_vpn" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.antigravity.vpn. All rights reserved." "\0"
-            VALUE "OriginalFilename", "antigravity_vpn.exe" "\0"
-            VALUE "ProductName", "antigravity_vpn" "\0"
+            VALUE "InternalName", "PrivateVPN" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 Private VPN. All rights reserved." "\0"
+            VALUE "OriginalFilename", "PrivateVPN.exe" "\0"
+            VALUE "ProductName", "Private VPN" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

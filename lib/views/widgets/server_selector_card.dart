@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../models/server_config.dart';
@@ -12,9 +13,18 @@ class ServerSelectorCard extends StatelessWidget {
     required this.onTap,
   });
 
+  String _cleanName(String name) {
+    if (Platform.isWindows) {
+      // Remove leading country flag emoji which renders as plain text 'DE' on Windows
+      return name.replaceFirst(RegExp(r'^(?:[\uD83C][\uDDE6-\uDDFF]){2}\s*'), '');
+    }
+    return name;
+  }
+
   @override
   Widget build(BuildContext context) {
     final server = activeServer;
+    final displayName = _cleanName(server?.name ?? 'Server tanlanmagan');
 
     return Material(
       color: Colors.transparent,
@@ -30,7 +40,7 @@ class ServerSelectorCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // Country Flag
+              // Country Flag / Badge
               Container(
                 width: 46,
                 height: 46,
@@ -40,10 +50,28 @@ class ServerSelectorCard extends StatelessWidget {
                   border: Border.all(color: AppColors.border),
                 ),
                 child: Center(
-                  child: Text(
-                    server?.countryFlag ?? '🌐',
-                    style: const TextStyle(fontSize: 24),
-                  ),
+                  child: Platform.isWindows
+                      ? Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+                          ),
+                          child: Text(
+                            server?.countryCode ?? 'VPN',
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 0.8,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          server?.countryFlag ?? '🌐',
+                          style: const TextStyle(fontSize: 24),
+                        ),
                 ),
               ),
 
@@ -56,7 +84,7 @@ class ServerSelectorCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      server?.name ?? 'Server tanlanmagan',
+                      displayName,
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 15,

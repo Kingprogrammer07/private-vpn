@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
@@ -142,11 +143,36 @@ class ServerListBottomSheet extends StatelessWidget {
                                   ),
                                   child: Row(
                                     children: [
-                                      // Flag
-                                      Text(
-                                        server.countryFlag,
-                                        style: const TextStyle(fontSize: 24),
-                                      ),
+                                      // Flag or Badge
+                                      Platform.isWindows
+                                          ? Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                                              decoration: BoxDecoration(
+                                                color: isActive
+                                                    ? AppColors.primary.withValues(alpha: 0.2)
+                                                    : AppColors.surfaceLight,
+                                                borderRadius: BorderRadius.circular(6),
+                                                border: Border.all(
+                                                  color: isActive
+                                                      ? AppColors.primary
+                                                      : AppColors.border,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                server.countryCode,
+                                                style: TextStyle(
+                                                  color: isActive
+                                                      ? AppColors.primary
+                                                      : AppColors.textPrimary,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            )
+                                          : Text(
+                                              server.countryFlag,
+                                              style: const TextStyle(fontSize: 24),
+                                            ),
                                       const SizedBox(width: 14),
 
                                       // Name & address
@@ -156,7 +182,9 @@ class ServerListBottomSheet extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              server.name,
+                                              Platform.isWindows
+                                                  ? server.name.replaceFirst(RegExp(r'^(?:[\uD83C][\uDDE6-\uDDFF]){2}\s*'), '')
+                                                  : server.name,
                                               style: TextStyle(
                                                 color: isActive
                                                     ? AppColors.primary

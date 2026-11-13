@@ -1,0 +1,10 @@
+{
+  "version": "1.0.1",
+  "build_number": 2,
+  "force_update": false,
+  "title": "Private VPN 1.0.1 Yangilanishi! 🚀",
+  "changelog": "• Windows desktop uchun rasmiy versiya va integratsiya qo'shildi\n• Cyber Shield logolari va ikonkalari yaxshilandi\n• Tizim proksi sozlamalari va tezkor ulanish optimallashtirildi",
+  "download_url_android": "https://github.com/Kingprogrammer07/private-vpn/releases/latest",
+  "download_url_windows": "https://github.com/Kingprogrammer07/private-vpn/releases/latest",
+  "github_release_url": "https://github.com/Kingprogrammer07/private-vpn/releases/latest"
+}

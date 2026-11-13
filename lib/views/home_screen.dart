@@ -3,14 +3,35 @@ import 'package:provider/provider.dart';
 import '../core/theme/app_theme.dart';
 import '../providers/server_provider.dart';
 import '../providers/vpn_provider.dart';
+import '../services/update_service.dart';
 import 'widgets/power_button.dart';
 import 'widgets/server_selector_card.dart';
 import 'widgets/speed_gauge_card.dart';
 import 'widgets/status_badge.dart';
 import 'server_list_bottom_sheet.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAppUpdateSilently();
+  }
+
+  void _checkAppUpdateSilently() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final update = await UpdateService.checkForUpdate();
+      if (update != null && mounted) {
+        UpdateService.showUpdateDialog(context, update);
+      }
+    });
+  }
 
   void _showServerList(BuildContext context) {
     showModalBottomSheet(
@@ -42,19 +63,28 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: AppColors.primary.withValues(alpha: 0.12),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: AppColors.primary.withValues(alpha: 0.3),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary.withValues(alpha: 0.12),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: AppColors.primary.withValues(alpha: 0.3),
+                                  ),
                                 ),
-                              ),
-                              child: const Icon(
-                                Icons.vpn_lock_rounded,
-                                color: AppColors.primary,
-                                size: 22,
+                                child: Image.asset(
+                                  'assets/images/app_logo.png',
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) => const Icon(
+                                    Icons.shield_rounded,
+                                    color: AppColors.primary,
+                                    size: 22,
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 10),
@@ -63,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
                                   Text(
-                                    "LEDA'S VPN",
+                                    "PRIVATE VPN",
                                     style: TextStyle(
                                       color: AppColors.textPrimary,
                                       fontSize: 16,
